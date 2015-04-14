@@ -26,7 +26,8 @@ class HangmanGameService {
     /**
      * @param EntityManager $entityManager
      */
-    public function __construct(EntityManager $entityManager) {
+    public function __construct(EntityManager $entityManager)
+    {
         $this->entityManager = $entityManager;
     }
 
@@ -41,31 +42,39 @@ class HangmanGameService {
      * @return $currentGame
      * @throws InvalidGameStatusException
      */
-    public function updateGame($currentGame, $letter) {
-        if (!preg_match('/^[a-z]+$/', $letter, $matches)) {
+    public function updateGame($currentGame, $letter)
+    {
+        if (!preg_match('/^[a-z]+$/', $letter, $matches))
+        {
             throw new LetterNotValidException("Input does not have correct format", 400);
         }
 
-        if ($currentGame->getStatus() == Game::STATUS_FAIL || $currentGame->getStatus() == Game::STATUS_SUCCESS) {
+        if ($currentGame->getStatus() == Game::STATUS_FAIL || $currentGame->getStatus() == Game::STATUS_SUCCESS)
+        {
             throw new InvalidGameStatusException("It is impossible to continue a game which is already ended", 400);
         }
 
         $word = $currentGame->getWord();
         $currentWordCharacters = str_split($word);
-        if (strpos($word, $letter) !== FALSE) {
+        if (strpos($word, $letter) !== FALSE)
+        {
             $currentGame->addCharacterGuessed($letter);
             $charactersGuessed = $currentGame->getCharactersGuessed();
 
             $arrayDiff = array_diff($currentWordCharacters, $charactersGuessed);
-            if (count($arrayDiff) == 0) {
+            if (count($arrayDiff) == 0)
+            {
                 $currentGame->setStatus(Game::STATUS_SUCCESS);
             }
-        } else {
+        }
+        else
+        {
             $triesLeft = $currentGame->getTriesLeft();
             $triesLeft = $triesLeft - 1;
             $currentGame->setTriesLeft($triesLeft);
 
-            if ($triesLeft == 0) {
+            if ($triesLeft == 0)
+            {
                 $currentGame->setStatus(Game::STATUS_FAIL);
             }
         }

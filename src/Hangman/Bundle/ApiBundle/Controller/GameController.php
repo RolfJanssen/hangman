@@ -28,14 +28,17 @@ class GameController extends Controller
         $gameRepository = $this->getDoctrine()->getManager()->getRepository('HangmanDatastoreBundle:ORM\Game');
         $session = $this->get('session');
 
-        try {
+        try
+        {
             $randomWord = $wordRepository->getRandomWord();
             $currentGame = $gameRepository->startGame($randomWord);
 
             $session->set('word', $randomWord);
             $session->set('currentGame', $currentGame->getId());
             $response = new JsonResponse(array("word" => $randomWord));
-        } catch (RuntimeException $runtimeException) {
+        }
+        catch (RuntimeException $runtimeException)
+        {
             $response = new JsonResponse(array("error" => array("code" => $runtimeException->getCode(), "message" => $runtimeException->getMessage())));
         }
 
@@ -47,29 +50,37 @@ class GameController extends Controller
      * @param Request $request
      * @return JsonResponse
      */
-    public function guessLetterAction(Request $request) {
+    public function guessLetterAction(Request $request)
+    {
         $letter = $request->get('letter');
         $gameRepository = $this->getDoctrine()->getManager()->getRepository('HangmanDatastoreBundle:ORM\Game');
         $hangmanGameService = $this->get('hangman_game_service');
         $gameId = $this->get('session')->get('currentGame');
 
-        try {
+        try
+        {
             $game = $gameRepository->find($gameId);
             $currentGame = $hangmanGameService->updateGame($game, $letter);
             $response = new JsonResponse(
                 array("word" => $currentGame->getWord(), "tries_left" => $currentGame->getTriesLeft(), "status" => $currentGame->getStatus())
             );
-        } catch (LetterNotValidException $letterNotValidException) {
+        }
+        catch (LetterNotValidException $letterNotValidException)
+        {
             $response = new JsonResponse(
                 array("status" => "error", "message" => $letterNotValidException->getMessage()),
                 $letterNotValidException->getCode()
             );
-        } catch (InvalidGameStatusException $invalidGameStatusException) {
+        }
+        catch (InvalidGameStatusException $invalidGameStatusException)
+        {
             $response = new JsonResponse(
                 array("status" => "error", "message" => $invalidGameStatusException->getMessage()),
                 $invalidGameStatusException->getCode()
             );
-        } catch (Exception $exception) {
+        }
+        catch (Exception $exception)
+        {
             $response = new JsonResponse(
                 array("status" => "error", "message" => $exception->getMessage()),
                 $exception->getCode()
