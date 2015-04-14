@@ -79,7 +79,6 @@ class HangmanGameService {
             }
         }
 
-        //TODO: check if entity based validation works
         $this->entityManager->persist($currentGame);
         $this->entityManager->flush();
 
