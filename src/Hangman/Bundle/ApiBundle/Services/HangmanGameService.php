@@ -37,12 +37,13 @@ class HangmanGameService {
      * if letter is not part of the word, decrease the triesLeft parameter of the game
      * Finish the game when word is guessed or when there are no tries left, by setting a game status of fail or success
      *
-     * @param $gameId - id of current running game
+     * @param Game $currentGame
      * @param $letter - letter which will be checked if it exists in the current game word
-     * @return $currentGame
+     * @return Game $currentGame
      * @throws InvalidGameStatusException
+     * @throws LetterNotValidException
      */
-    public function updateGame($currentGame, $letter)
+    public function updateGame(Game $currentGame, $letter)
     {
         if (!preg_match('/^[a-z]+$/', $letter, $matches))
         {
