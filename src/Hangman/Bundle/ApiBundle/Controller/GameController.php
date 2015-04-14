@@ -39,7 +39,10 @@ class GameController extends Controller
         }
         catch (RuntimeException $runtimeException)
         {
-            $response = new JsonResponse(array("error" => array("code" => $runtimeException->getCode(), "message" => $runtimeException->getMessage())));
+            $response = new JsonResponse(
+                array("status" => "error", "message" => $runtimeException->getMessage()),
+                $runtimeException->getCode()
+            );
         }
 
         return $response;
