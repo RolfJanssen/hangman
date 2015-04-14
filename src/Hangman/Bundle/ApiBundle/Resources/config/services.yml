@@ -1,0 +1,11 @@
+services:
+    get_set_method_normalizer:
+        class: Symfony\Component\Serializer\Normalizer\GetSetMethodNormalizer
+        tags:
+            - { name: serializer.normalizer }
+    hangman_game_service:
+        class:  Hangman\Bundle\ApiBundle\Services\HangmanGameService
+        arguments: [ "@doctrine.orm.entity_manager" ]
+    hangman_letter_constraint_validator:
+        class:  Hangman\Bundle\DatastoreBundle\Validator\Constraint\ContainsAlphanumericValidator
+        arguments: [ "@doctrine.orm.entity_manager" ]

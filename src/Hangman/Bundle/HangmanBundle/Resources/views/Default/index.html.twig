@@ -1,0 +1,63 @@
+{% extends '::base.html.twig' %}
+
+{% block title %}Hangman SIM demo{% endblock %}
+{% block stylesheets %}
+    {% stylesheets
+      '@HangmanHangmanBundle/Resources/public/css/bootstrap.min.css'
+      '@HangmanHangmanBundle/Resources/public/css/bootstrap-responsive.css'
+      '@HangmanHangmanBundle/Resources/public/css/jumbotron-narrow.css'
+      '@HangmanHangmanBundle/Resources/public/css/hangman.css' filter='cssrewrite'
+    %}
+    <link rel="stylesheet" href="{{ asset_url }}" />
+    {% endstylesheets %}
+{% endblock %}
+
+{% block body %}
+
+    <div class="container">
+        <div class="header">
+            <h3 class="text-muted">Rolf Janssen Hangman Demo</h3>
+        </div>
+
+        <div class="jumbotron">
+            <h1>Hangman</h1>
+            <p class="lead">Hangman is a word-guessing game. Guess letters to fill in the blanks before your little man gets hung out to dry. Tap "start game" to begin.</p>
+            <p><a class="btn btn-lg btn-primary" id="newGame" href="#" role="button">Start game</a><a class="btn btn-lg btn-success" id="resetGame" href="#" role="button">reset game</a></p>
+        </div>
+
+        <div class="row marketing">
+            <div class="col-lg-8">
+                <p id="loading">Game loading. . .</p>
+                <canvas id="stage" width="578" height="200"></canvas>
+            </div>
+            <div class="col-lg-4">
+                <div id="errorMessageContainer" class="errorMessageContainer" style="display:none">
+                    <h2>Oh noes!!!</h2>
+                    <span id="errorMessage" class="errorMessage"></span>
+                </div>
+                <div id="gameStatus" class="gameStatus"></div>
+                <div id="gameResult" class="gameStatus"></div>
+                <p id="word" class="word"></p>
+                <div id="letters" class="letters"></div>
+            </div>
+        </div>
+
+        <div class="footer">
+            <p>&copy; Company 2014</p>
+        </div>
+
+    </div> <!-- /container -->
+
+
+{% endblock %}
+
+
+{% block javascripts %}
+    {% javascripts
+        '@HangmanHangmanBundle/Resources/public/js/jquery-1.11.min.js'
+        '@HangmanHangmanBundle/Resources/public/js/bootstrap.min.js'
+        '@HangmanHangmanBundle/Resources/public/js/hangman.js'
+    %}
+      <script type="text/javascript" src="{{ asset_url }}"></script>
+    {% endjavascripts %}
+{% endblock %}

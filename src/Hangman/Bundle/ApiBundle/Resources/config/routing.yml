@@ -1,0 +1,9 @@
+start_game:
+    path:     /games
+    defaults: { _controller: HangmanApiBundle:Game:games }
+    methods:  [POST]
+
+guess_word:
+    path:    /games/{letter}
+    defaults: { _controller: HangmanApiBundle:Game:guessLetter }
+    methods:  [PUT]

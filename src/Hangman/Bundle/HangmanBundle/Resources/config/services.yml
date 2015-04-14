@@ -1,0 +1,4 @@
+services:
+#    hangman_hangman.example:
+#        class: Hangman\Bundle\HangmanBundle\Example
+#        arguments: [@service_id, "plain_value", %parameter%]
