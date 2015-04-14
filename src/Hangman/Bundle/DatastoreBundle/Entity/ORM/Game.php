@@ -3,8 +3,6 @@ namespace Hangman\Bundle\DatastoreBundle\Entity\ORM;
 
 use InvalidArgumentException;
 use Doctrine\ORM\Mapping as ORM;
-use Symfony\Component\Validator\Constraints as Assert;
-use Hangman\Bundle\DatastoreBundle\Validator\Constraint as HangmanAssert;
 
 /**
  * @ORM\Entity(repositoryClass="Hangman\Bundle\DatastoreBundle\Repository\ORM\GameRepository")
@@ -44,8 +42,6 @@ class Game
 
     /**
      * @ORM\Column(name="characters_guessed", type="json_array")
-     * @HangmanAssert\ContainsAlphanumeric
-     * @Assert\NotBlank
      */
     protected $charactersGuessed = array();
 
