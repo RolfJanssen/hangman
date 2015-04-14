@@ -18,9 +18,6 @@ class HangmanGameServiceTest extends PHPUnit_Framework_TestCase
     const ONE_TRY_LEFT = 1;
     const NONE_TRIES_LEFT = 0;
 
-    protected $expectedWord = 'tested';
-    protected $noWordsInDatastore = false;
-
     /**
      * @expectedException \Hangman\Bundle\ApiBundle\Services\Exceptions\InvalidGameStatusException
      */
